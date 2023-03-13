@@ -3,8 +3,11 @@
 This application is written in Python and is used to download the latest EBA registry and parse data from it.
 
 Due to the fact that the EBA registry site uses a button that uses JS to generate a link, it cannot be retrieved by scrapping the site using something like `requests` or `beautifulsoup`. Therefore `selenium` is used which controls a Chromium browser and can mimic real user interaction. To simplify the launch process `Docker` and `Docker Compose` are used to automate the deployment.
+
 ## Requirements
 Before starting the application, make sure you have Docker and Docker Compose installed.
+
+The project has not been tested on Apple Sillicon Macs and the Docker container might not work properly.
 
 ## Launching Application
 Go to the project root directory and enter the following command:
