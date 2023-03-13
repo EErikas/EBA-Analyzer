@@ -8,8 +8,8 @@ from prettytable import PrettyTable
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-SCRIPT_PATH = dirname(abspath(__file__))
-RESULT_DIR = join(SCRIPT_PATH, 'results')
+ROOT_DIR = dirname(abspath(__file__))
+RESULT_DIR = join(ROOT_DIR, 'results')
 URL = 'https://euclid.eba.europa.eu/register/pir/registerDownload'
 
 
@@ -20,14 +20,14 @@ def get_by_filename(extension, folder):
 
 def cleanup():
     print('Cleaning up old files... ')
-    files = [join(SCRIPT_PATH, f)
-             for f in listdir(SCRIPT_PATH) if f.split('.')[-1] in ('json', 'sha256')]
+    files = [join(ROOT_DIR, f)
+             for f in listdir(ROOT_DIR) if f.split('.')[-1] in ('json', 'sha256')]
     for file in files:
         remove(file)
 
 
 def get_countries():
-    with open(join(SCRIPT_PATH, 'countries.csv'), 'r') as data:
+    with open(join(ROOT_DIR, 'countries.csv'), 'r') as data:
         return dict(foo[:-1].split(',') for foo in data.readlines())
 
 
@@ -64,16 +64,16 @@ def download():
 
     print('Extracting files...')
     # Get Archive
-    zip_file = get_by_filename('.zip', SCRIPT_PATH)
+    zip_file = get_by_filename('.zip', ROOT_DIR)
 
-    unpack_archive(zip_file, SCRIPT_PATH)
+    unpack_archive(zip_file, ROOT_DIR)
     remove(zip_file)
 
     print('Exited successfully')
 
 
 def process_data():
-    data_file = get_by_filename('.json', SCRIPT_PATH)
+    data_file = get_by_filename('.json', ROOT_DIR)
     print('Reading data...')
     with open(data_file) as data:
         parsed_json = json.load(data)
